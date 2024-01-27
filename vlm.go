@@ -12,15 +12,16 @@ const (
 	baseVLMCommand = "requests/vlm_cmd.xml"
 )
 
+// executeVLMRequest executes a GET request and parses the response XML
 func (v *VLC) executeVLMRequest(base string, params paramMap) (*VLM, error) {
 	endpoint := buildQueryEndpoint(base, params)
 
-	statusRaw, err := v.client.Get(endpoint)
+	vlmRaw, err := v.client.Get(endpoint)
 	if err != nil {
 		return nil, fmt.Errorf("unable to execute request, %s, %w", endpoint, err)
 	}
 
-	return client.ParseXMLResponse[VLM](statusRaw)
+	return client.ParseXMLResponse[VLM](vlmRaw)
 }
 
 // GetVLMElements fetches the full list of VLM elements

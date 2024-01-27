@@ -4,9 +4,13 @@ import (
 	"github.com/zivkovicmilos/go-vlc/client"
 )
 
+// VLC http server commands extracted from
+// https://github.com/videolan/vlc/blob/f7bb59d9f51cc10b25ff86d34a3eff744e60c46e/share/lua/http/requests/README.txt
+
 const (
 	baseStatus   = "requests/status.json"
 	basePlaylist = "requests/playlist.json"
+	baseBrowse   = "requests/browse.json"
 )
 
 const (
@@ -16,6 +20,8 @@ const (
 	valKey     = "val"
 	optionKey  = "option"
 	bandKey    = "band"
+	dirKey     = "dir"
+	uriKey     = "uri"
 )
 
 const (

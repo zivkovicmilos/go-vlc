@@ -105,3 +105,21 @@ type VLM struct {
 	XMLName xml.Name `xml:"vlm"`
 	Error   string   `xml:"error"`
 }
+
+type File struct {
+	Type             string `json:"type"` // [dir, file]
+	Path             string `json:"path"`
+	Name             string `json:"name"`
+	URI              string `json:"uri"`
+	AccessTime       uint64 `json:"access_time"` // unix time
+	UID              uint64 `json:"uid"`
+	CreationTime     uint64 `json:"creation_time"` // unix time
+	GID              uint64 `json:"gid"`
+	ModificationTime uint64 `json:"modification_time"` // unix time
+	Mode             uint64 `json:"mode"`
+	Size             uint64 `json:"size"` //  bytes
+}
+
+type Browse struct {
+	Elements []File `json:"element"`
+}
