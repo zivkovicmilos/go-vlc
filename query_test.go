@@ -2,7 +2,6 @@ package vlc
 
 import (
 	"fmt"
-	"regexp"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -50,17 +49,13 @@ func TestBuildQueryEndpoint(t *testing.T) {
 				"key1": "value1",
 				"key2": "value2",
 			}
-		)
 
-		re := regexp.MustCompile(`^https://example\.com\?[A-Za-z0-9]+=[A-Za-z0-9]+&[A-Za-z0-9]+=[A-Za-z0-9]+$`)
+			expectedURL = fmt.Sprintf("%s?key1=value1&key2=value2", baseURL)
+		)
 
 		endpoint := buildQueryEndpoint(baseURL, params)
 
-		assert.True(t, re.MatchString(endpoint))
-
-		for key, value := range params {
-			assert.Contains(t, endpoint, fmt.Sprintf("%s=%s", key, value))
-		}
+		assert.Equal(t, expectedURL, endpoint)
 	})
 
 	t.Run("spaces in params / values", func(t *testing.T) {

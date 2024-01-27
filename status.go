@@ -65,7 +65,7 @@ func (v *VLC) PlaySource(source string, option ...string) (*Status, error) {
 		inputKey:   source,
 	}
 
-	if len(option) > 1 {
+	if len(option) >= 1 {
 		op := option[0]
 
 		// Make sure the option is valid
