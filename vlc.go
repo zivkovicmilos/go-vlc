@@ -65,10 +65,12 @@ const (
 	aspectRatioCommand   = "aspectratio"
 )
 
+// VLC is an instance of the VLC HTTP client
 type VLC struct {
 	client client.Client
 }
 
+// NewVLC creates a new VLC HTTP client instance
 func NewVLC(client client.Client) *VLC {
 	return &VLC{
 		client: client,
