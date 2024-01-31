@@ -42,9 +42,9 @@ type Equalizer struct {
 }
 
 type Information struct {
-	Chapters []any                  `json:"chapters"` // TODO define
+	Chapters []uint64               `json:"chapters"`
 	Category map[string]StreamTable `json:"category"`
-	Titles   []any                  `json:"titles"` // TODO define
+	Titles   []uint64               `json:"titles"`
 	Chapter  int64                  `json:"chapter"`
 	Title    int64                  `json:"title"`
 }
