@@ -19,8 +19,9 @@ var (
 )
 
 var (
-	volumeRegex = regexp.MustCompile(`^[+-]?\d+(%)?$`)
-	seekRegex   = regexp.MustCompile(`^([+-]?)((\d+[Hh]:)?(\d+[Mm:]?:)?(\d+([Ss"]?)|(\d+)%))$`)
+	volumeRegex     = regexp.MustCompile(`^[+-]?\d+(%)?$`)
+	seekNumberRegex = regexp.MustCompile(`^[+-]?\d+(%)?$`)
+	seekFormatRegex = regexp.MustCompile(`^([+-])?(\d+[Hh])?(:)?(\d+[Mm'])?(:\d+([Ss"])?)?$`)
 )
 
 const (
@@ -228,7 +229,6 @@ func (v *VLC) TogglePlaylistLoop() (*Status, error) {
 }
 
 // TogglePlaylistRepeat toggles a playlist playback repeat
-// TODO detail difference with loop
 func (v *VLC) TogglePlaylistRepeat() (*Status, error) {
 	params := paramMap{
 		commandKey: repeatCommand,
@@ -295,7 +295,8 @@ func (v *VLC) SetVolume(volume string) (*Status, error) {
 // -10% -> seek 10% back
 func (v *VLC) SeekToValue(value string) (*Status, error) {
 	// Make sure the seek value is valid
-	if !seekRegex.MatchString(value) {
+	if !seekNumberRegex.MatchString(value) &&
+		!seekFormatRegex.MatchString(value) {
 		return nil, errInvalidSeekValue
 	}
 
